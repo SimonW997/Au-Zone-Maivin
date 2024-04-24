@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI-Vision landing page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <ul class="horizontalstack">
+        <div class="imagecontainer">
+            <div class="box">
+                <h3>Live Image</h3>
+                <img class="image" src="static/Bild00000.jpg" />
+            </div>
+        </div>
+        <div class="settingscontainer">
+          <div class="box">
+            <h3>Device Information</h3>
+            <table style="width: 100%;">
+                <tr>
+                  <th style="width: 30%;">Hostname</th>
+                  <th style="width: 70%;">{{ device_information['hostname'] }}</th>
+                </tr>
+                <tr>
+                  <td>DHCP-IPv4</td>
+                  <td>{{ device_information['ip_address'] }}</td>
+                </tr>
+                <tr>
+                  <td>TCP/IP-IPv4</td>
+                  <td>{{ device_information['tcpip_address'] }}</td>  
+                </tr>
+                <tr>
+                  <td>FTP-IP</td>
+                  <td>{{ device_information['ftp_address'] }}</td>
+                </tr>
+            </table>
+          </div>
+          <div class="box">
+            <h3>Device Settings</h3>
+                <form style="width: 100%;" name="settings">
+                    <label>TCP/IP Address</label>
+                    <input type="text" id="tcp_ip_address" name="tcp_ip_address"><br><br>
+                    <label>FTP-Server Address</label>
+                    <input type="text" id="ftp_server_address" name="ftp_server_address"><br><br>
+                    <label>FTP-Server User</label>
+                    <input type="text" id="ftp_server_user" name="ftp_server_user"><br><br>
+                    <label>FTP-Server Password</label>
+                    <input type="password" id="ftp_server_password" name="ftp_server_password"><br><br>
+                </form>
+            <button class="button" type="submit" name="savesettings" value="savesettings">Save</button>
+          </div>
+        </div>
+    </ul>
+</body>
+</html>

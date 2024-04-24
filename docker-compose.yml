@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  orientation-debug:
+    build:
+      context: .
+      dockerfile: Dockerfile.debug
+      cache_from: []
+    image: ${LOCAL_REGISTRY}:5002/orientation-debug:${TAG}
+    network_mode: "host"
+    ports:
+      - 6502:6502
+      - 6512:6512
+    
+  orientation:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ${DOCKER_LOGIN}/orientation:${TAG}
+    network_mode: "host"

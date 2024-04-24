@@ -1,0 +1,21 @@
+{
+  "torizon_psswd": "1",
+  "torizon_login": "torizon",
+  "torizon_ip": "172.16.210.117",
+  "host_ip": "172.16.210.106",
+  "torizon_workspace": "${workspaceFolder}",
+  "torizon_debug_port": "6512",
+  "torizon_debug_ssh_port": "6502",
+  "torizon_debug_port2": "",
+  "torizon_debug_port3": "",
+  "torizon_gpu": "",
+  "torizon_arch": "aarch64",
+  "wait_sync": "1",
+  "torizon_run_as": "torizon",
+  "torizon_app_root": "/home/torizon/app",
+  "tcb.packageName": "OrientationDetection",
+  "tcb.version": "3.8.1",
+  "docker.environment": {
+    "DOCKER_HOST": "tcp://172.16.210.117:2375"
+  }
+}
