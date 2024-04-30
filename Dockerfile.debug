@@ -17,7 +17,7 @@ ARG SSH_DEBUG_PORT=
 ##
 # Run as
 ##
-ARG SSHUSERNAME=
+ARG SSHUSERNAME="torizon"
 
 ##
 # Directory of the application inside container
@@ -48,12 +48,11 @@ RUN apt-get -q -y update && \
     rsync \
     file \
     screen \
+    visionpack \
     python3-minimal \
     python3-pip \
     python3-setuptools \
     python3-venv \
-    python3-debugpy \
-    visionpack \
     && apt-get clean && apt-get autoremove && \
     rm -rf /var/lib/apt/lists/*
 
@@ -74,14 +73,11 @@ RUN python3 -m venv ${APP_ROOT}/.venv --system-site-packages
 # Install pip packages on venv
 COPY requirements.txt /requirements.txt
 RUN . ${APP_ROOT}/.venv/bin/activate && \
-    pip3 install --upgrade pip && pip3 install --break-system-packages -r requirements.txt && \
-    rm requirements.txt
+    pip3 install --upgrade pip && pip3 install --break-system-packages -r /requirements.txt
 
-
-# Install custom wheel    
-COPY --chown=$SSHUSERNAME:$SSHUSERNAME ./maivin-wheels ${APP_ROOT}/maivin-wheels
-RUN pip3 install maivin-wheels/edgefirst_schemas-1.1.0.post3-py3-none-any.whl \
-    rm maivin-wheels/edgefirst_schemas-1.1.0.post3-py3-none-any.whl
+# Install custom wheel for edgefirst schemas    
+COPY --chown=$SSHUSERNAME:$SSHUSERNAME ./maivin-wheels /maivin-wheels
+RUN pip3 install /maivin-wheels/edgefirst_schemas-1.1.0.post3-py3-none-any.whl
 
 # ⚠️ DEBUG PURPOSES ONLY!!
 # copies RSA key to enable SSH login for user
@@ -89,6 +85,7 @@ COPY .conf/id_rsa.pub /id_rsa.pub
 
 # create folders needed for the different components
 # configures SSH access to the container and sets environment by default
+RUN useradd -m torizon
 RUN mkdir /var/run/sshd && \
     sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' \
         -i /etc/pam.d/sshd && \

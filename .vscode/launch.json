@@ -3,14 +3,14 @@
     "configurations": [
         {
             "name": "Python Local",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/src/main.py",
             "preLaunchTask": "host-install-pip-requirements"
         },
         {
             "name": "Torizon ARMv7",
-            "type": "python",
+            "type": "debugpy",
             "request": "attach",
             "justMyCode": false,
             "host": "${config:torizon_ip}",
@@ -25,7 +25,7 @@
         },
         {
             "name": "Torizon ARMv8",
-            "type": "python",
+            "type": "debugpy",
             "request": "attach",
             "justMyCode": false,
             "host": "${config:torizon_ip}",
